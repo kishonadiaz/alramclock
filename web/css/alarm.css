@@ -1,0 +1,52 @@
+.alarm > input{
+    font-size: 100px;
+    width: 84px;
+}
+.alarm{
+    font-size: 171px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.number{
+    /* width: 107px; */
+    position: relative;
+    display: flex;
+}
+.number > div{
+    display: flex;
+    flex-direction: revert;
+    flex-direction: column;
+    /* float: right; */
+    margin: auto;
+    /* position: absolute; */
+    right: 0;
+}
+.number > div > button{
+    height: 30px;
+}
+.zone{
+    height: 56px;
+    font-size: 50px;
+}
+.large{
+    width: 40px;
+    height: 40px;
+}
+.toggle{
+    width: 120px;
+    border: 1px solid blue;
+    height: 23px;
+    position: relative;
+}
+.toggleswitch{
+    border: 1px solid red;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 96px;
+    transition: all 2s ease-out;
+}
+.off{
+    right: 0;
+}

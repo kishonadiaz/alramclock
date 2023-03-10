@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+.numstyle{
+    font-family: 'Orbitron', sans-serif;
+    width: 158px;
+}
+.timecont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    font-size: 7rem;
+}
+.timecont span{
+    margin: 30px;
+}
+.boxes{
+    display: flex;
+    justify-content: end;
+}
+.boxes  button:first-child{
+    margin: 0 auto;
+    transform: translate(50%, 50%);
+    width: 200px;
+    height: 58px;
+}
+.boxes > button {
+    font-size: 1.2em;
+    height: min-content;
+    margin: 2px;;
+}
+.large{
+    width: 40px;
+    height: 40px;
+}

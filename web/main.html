@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="/eel.js"></script>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <script>
+        eel.expose(my_javascript_function);
+        function my_javascript_function(text) {
+                console.log(text);    
+        }
+
+        eel.pythoncode("heres");
+        eel.expose(js_random);
+        function js_random() {
+            return Math.random();
+        }
+        
+        async function run() {
+            // Synchronous call must be inside function marked 'async'
+            
+            // Get result returned synchronously by 
+            //  using 'await' and passing nothing in second brackets
+            //        v                   v
+            let n = await eel.py_random()();
+            console.log('Got this from Python: ' + n);
+        }
+        
+
+        run();
+    </script>
+</head>
+<body>
+    <div id="conainter">
+        <div class="boxes">
+            <button type="button" id="snooze">Snooze</button>
+            <button type="button" id="alarm"><svg class="float large black">
+                <use xlink:href="./assets/alarm-clock-svgrepo-com.svg#Capa_1"
+                x="10%" y="10%" width="80%" height="80%" fill="black"/>
+                </svg></button>
+            <button type="button" id="settings"><svg class="float large black">
+                <use xlink:href="./assets/settings-svgrepo-com.svg#settings"
+                x="10%" y="10%" width="80%" height="80%" fill="black"/>
+                </svg></button>
+        </div>
+        
+        <div class="boxes">
+            <div class="timecont">
+                <div id="hour" class="numstyle">0</div>
+                <span>:</span>
+                <div id="min" class="numstyle">00</div>
+                <span>:</span>
+                <div id="sec" class="numstyle">00</div>
+                &nbsp;
+                <div id="ampm" class="numstyle">AM</div>
+            </div>
+        </div>
+        
+        
+
+    </div>
+    <script src="js/events.js"></script>
+    <script src="js/clock.js"></script>
+
+</body>
+</html>

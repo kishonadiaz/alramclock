@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="/eel.js"></script>
+    <link rel="stylesheet" href="./css/alarm.css">
+    <script>
+        eel.expose(testing)
+        function testing(){
+            console.log("shere");
+        }
+        eel.pythoncode("ok");
+    </script>
+</head>
+<body>
+    <div class="box">
+        <button id="backbtn">back</button>
+    </div>
+    <div class="box">
+        <div class="alarmscont">
+            <div class="alarm">
+                <div class="toggle" ><div class="toggleswitch"></div> <input type="checkbox" name="" class="toggled"></div>
+                <div class="number">
+                    <span>00</span>
+                    <div>
+                        <button>up</button>
+                        <button>down</button>
+                    </div>
+                </div>
+                <span>:</span>
+                <div class="number">
+                    <span>00</span>
+                    <div>
+                        <button>up</button>
+                        <button>down</button>
+                    </div>
+                </div>
+                <select name="ampm" id="" class="zone">
+                    <option value="1">AM</option>
+                    <option value="2">PM</option>
+                </select>
+                <button><svg class="float large black">
+                    <use xlink:href="./assets/alarm-clock-svgrepo-com.svg#Capa_1"
+                    x="10%" y="10%" width="80%" height="80%" fill="black"/>
+                    </svg></button>
+                <!-- <input type="number" name="hour" id="" max="12" min="00" placeholder="00">
+                <span>:</span>
+                <input type="number" name="hour" id="" max="59" min="00" placeholder="00"> -->
+            </div>
+        </div>
+    </div>
+    
+    <script src="./js/alarmpage.js"></script>
+</body>
+</html>
