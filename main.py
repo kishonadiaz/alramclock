@@ -9,14 +9,19 @@ def pythoncode(text):
 @eel.expose
 def py_random():
     return random.random()
+@eel.expose
+def list_of_music():
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    dir_list = os.listdir(dir_path+"\\web\\assets\\music\\")
+    return dir_list
+
 #pythoncode("there")
 
 
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
-dir_list = os.listdir(dir_path+"\\web\\assets\\")
 
-print(dir_list)
+
+
 eel.start('main.html', mode='chrome',block=False, cmdline_args=['--start-fullscreen'])
 eel.my_javascript_function("hshere")
 

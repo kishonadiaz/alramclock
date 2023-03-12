@@ -1,3 +1,5 @@
+
+
 .alarm > input{
     font-size: 100px;
     width: 84px;
@@ -7,6 +9,29 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+.title{
+    flex-grow: 1;
+    flex-shrink: 4;
+    font-size: 33px;
+    left: 45px;
+    width: 84%;
+    position: relative;
+    white-space: break-spaces;
+    border-bottom: 1px solid;
+}
+.title hr{
+    width: 224px;
+    left: 0;
+    position: absolute;
+}
+.row{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 .number{
     /* width: 107px; */
@@ -45,8 +70,67 @@
     height: 20px;
     position: absolute;
     right: 96px;
-    transition: all 2s ease-out;
+    transition: all 1s ease;
+}
+.togglecheckbox{
+
 }
 .off{
     right: 0;
+}
+.ringsong{
+    font-size: 20px;
+    text-align: right;
+}
+.row ul{
+    position: absolute;
+    /* bottom: 0; */
+    top: 0;
+    font-size: 63px;
+    border: 1px solid blue;
+    width: 85%;
+    background: white;
+    z-index: 2;
+    overflow: auto;
+    height: 300px;
+    padding: 0;
+}
+.row ul li{
+    position: relative;
+    display: flex;
+    font-size: 25px;
+    /* margin-bottom: 10px; */
+    border-bottom: 1px solid black;
+    list-style: none;
+    padding: 18px;
+}
+.row ul li > button{
+    right: 0;
+    top: 0;
+    position: absolute;
+    height: 100%;
+}
+.close{
+    display: none;
+}
+
+nav{
+    position: fixed;
+    width: 99%;
+    z-index: 20;
+}
+nav .left{
+    float: left;
+}
+nav .right{
+    float: right;
+}
+.clear{
+    clear: both;
+}
+.hrdiv{
+    flex-grow: .5;
+}
+.hrdiv hr{
+    transform: translate(-624px, 25px);
 }

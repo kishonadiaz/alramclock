@@ -60,7 +60,15 @@ var Numberfield = function(a={cont:document.querySelector(""),max:59,min:0}){
     this.getText=function(){
         return this.span.innerText;
     }
-  
+    this.setText = (val)=>{
+        if(val > 59){
+            val = 59;
+        }
+        if(val < 0){
+            val = 0;
+        }
+        this.lastcount = val;
+    }
     this.events = function(){
         this.upbtn.addEventListener("click",()=>{
             //this.span.innerText = this.counter.toLocaleString('en-us',{minimumIntegerDigits:2,useGrouping:false});;
@@ -92,9 +100,100 @@ var Numberfield = function(a={cont:document.querySelector(""),max:59,min:0}){
     
 
 }
+var MusicList = function(){
+    this.cont = document.createElement("ul");
+    this.cont.classList.add("close");
+    
+    this.listitems = [];
+    this.add = (name)=>{
+        var l = document.createElement("li");
+        l.innerText = name;
+        var b = document.createElement("button");
+        b.innerHTML = "Select";
+        l.append(b);
+        this.listitems.push(l);
+        this.append(l);
+    }
+    this.musicList =async ()=>{
+        var n = await eel.list_of_music()();
+
+        for(var i of n){
+            this.add(i);
+        }
+    }
+    this.update =()=>{
+        // var m = this.cont;
+        // console.log(m.querySelectorAll("li"));
+    }
+    this.append = (item)=>{
+        this.cont.append(item);
+    }
+    this.get = (val)=>{
+        var m = this.cont.querySelectorAll(val);
+        if(m!= null)
+        return m;
+        
+    }
+    this.addto = ()=>{
+        return this.cont;
+    }
+}
 var AlarmField = function(){
     this.id = "H"+Helper.count++;
+    this.musicItems = new MusicList();
     this.cont = document.createElement("div");
+
+    this.row = document.createElement("div");
+    this.row.setAttribute("class","row");
+
+    this.musictitlecont = document.createElement("div")
+    this.musictitlecont.setAttribute("class","ringsong")
+    this.musicspan = document.createElement("span");
+    this.musicspan.innerText = "Test";
+    this.musichr = document.createElement("hr");
+
+    this.musictitlecont.append(this.musicspan);
+    this.musictitlecont.append(this.musichr);
+
+    
+
+    this.musiclistrow = document.createElement("div");
+    this.musiclistrow.setAttribute("class","row");
+    console.log(this.musicItems);
+    this.musiclistrow.append(this.musictitlecont);
+    this.musiclistrow.append(this.musicItems.addto())
+
+    this.titlerow = document.createElement("div");
+    this.titlerow.setAttribute("class","row");
+
+    this.title = document.createElement("span");
+    this.title.innerHTML = "Title";
+    this.title.setAttribute("class","title");
+    this.title.setAttribute("contentEditable","true");
+
+    this.hrdiv = document.createElement("div");
+    this.hrdiv.setAttribute("class","hrdiv");
+    this.hr = document.createElement("hr");
+    this.hrdiv.append(this.hr);
+
+    this.titlerow.append(this.title);
+    //this.titlerow.append(this.hrdiv);
+
+    this.deletebtn = document.createElement("button");
+    this.deletebtn.innerText = "Delete";
+    this.deletebtn.classList.add("close");
+
+    this.isontogglecont = document.createElement("div");
+    this.isontogglecont.setAttribute("class","toggle")
+    this.toogleswitch = document.createElement("div");
+    this.toogleswitch.setAttribute("class","toggleswitch");
+    this.tooglecheckbox = document.createElement("input");
+    this.tooglecheckbox.type="checkbox";
+    this.tooglecheckbox.setAttribute("class","togglecheckbox");
+
+    this.isontogglecont.append(this.toogleswitch);
+    this.isontogglecont.append(this.tooglecheckbox);
+
     this.colons = document.createElement("span");
     this.colons.innerText = ":";
     this.zone = document.createElement("select");
@@ -110,31 +209,109 @@ var AlarmField = function(){
     this.hours = new Numberfield({max:12});
     this.mins = new Numberfield({max:59});
 
-    this.cont.append(this.hours.add());
-    this.cont.append(this.colons);
-    this.cont.append(this.mins.add());
-    this.cont.append(this.zone);
-    this.cont.append(this.alarmonoroff);
+    this.row.append(this.deletebtn);
+    this.row.append(this.isontogglecont);
+    this.row.append(this.hours.add());
+    this.row.append(this.colons);
+    this.row.append(this.mins.add());
+    this.row.append(this.zone);
+    this.row.append(this.alarmonoroff);
+
+
+    this.cont.append(this.titlerow);
+    this.cont.append(this.row);
+    this.cont.append(this.musiclistrow);
+
+    this.getmusiclist = async ()=>{
+        this.musicItems.musicList();
+    }
     this.getHour = ()=>{
         return this.hours.getText();
+    }
+    this.setHour = (val)=>{
+        this.hours.setText(val);
     }
     this.getMin = ()=>{
         return this.mins.getText();
     }
-    this.getSelected = ()=>{
+    this.setMin = (val)=>{
+        this.mins.setText(val);
+    }
+    this.getZoneText = ()=>{
         var text = this.zone.options[this.zone.selectedIndex].text;
         return text;
     }
+    this.setZoneText = (val)=>{
+        var text = this.zone.options[this.zone.selectedIndex].text;
+        console.log(this.zone.options);
+        for(var i of this.zone.options){
+            console.log(i);
+            if(i.innerText == val){
+                i.setAttribute("selected","selected");
+            }
+        }
+        return text;
+    }
+    this.getMusicText = ()=>{
+        return this.musicspan.innerText;
+    }
+    this.setMusicText = (val)=>{
+        this.musicspan.innerText = val;
+    }
+
     this.update = ()=>{
         this.hours.update();
         this.mins.update();
+        this.musicItems.update()
     }
     this.add = ()=>{
         return this.cont;
     }
     this.events = ()=>{
+        var musictitleclick = (e)=>{
+            //alert("s");
+            this.musicItems.addto().classList.toggle("close");
+            var mbtn = this.musicItems.addto();
+            var l = (e)=>{
+                //console.log(e)
+                this.musicspan.innerHTML = e.target.previousSibling.data;
+            }
+            if(mbtn){
+                console.log(mbtn);
+                var m =this.musicItems.get("button")
+                if(m != null){
+                    console.log(m);
+                    m.forEach((item,key)=>{
+                        if(item){
+                            item.removeEventListener("click",l);
+                            item.addEventListener("click",l);
+                        }
+                    })
+                    // m.addEventListener("click",()=>{
+                    //     alert("sd");
+                    // })              
+                }
+               
+            }
+        }
         this.hours.events();
         this.mins.events();
+        this.toogleswitch.addEventListener("click",()=>{
+            if(this.tooglecheckbox.checked == false){
+                //alert("here");
+                this.toogleswitch.classList.add("off");
+                this.tooglecheckbox.checked = true;
+            }else{
+                this.toogleswitch.classList.remove("off");
+                this.tooglecheckbox.checked = false;
+            }
+        })
+        if(this.musicspan){
+            this.musicspan.removeEventListener("click",musictitleclick);
+            this.musicspan.addEventListener("click",musictitleclick);
+        }
+       
+
     }
 }
 
@@ -169,6 +346,16 @@ if(backbutton){
 var v = new Numberfield({cont:document.querySelector(".alarm"),max:12})
 var h = document.querySelector(".alarmscont");
 var a = new AlarmField();
+
+a.getmusiclist();
+a.setHour(6);
+a.setMin(-2);
+a.setZoneText("PM");
+a.setMusicText("Hello");
+// async function run(){
+//     console.log( await eel.list_of_music()());
+// }
+// run();
 a.events();
     // document.querySelector(".alarm").append(v.add());
     // console.log(v);
